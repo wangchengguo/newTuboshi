@@ -10,7 +10,7 @@ var path = require("path"),
 var buildType = gulpUtil.env.buildtype || "test";
 console.log('buildType ='+buildType);
 
-var mavenCmd = "mvn clean package spring-boot:repackage";
+var mavenCmd = "/app/tools/maven/bin/mvn clean package spring-boot:repackage";
 	
 function mvnBuild() {
 	return mavenCmd + " -P" + buildType;
@@ -37,13 +37,13 @@ function generateBuildTasks() {
 		}));
 	});
 	
-	gulp.task("build", taskNames, function() {
+	gulp.task("default", taskNames, function() {
 		console.log("Build: " + buildType);
 	});
 }
 
 generateBuildTasks();
 
-gulp.task('default', function () {
-	runSequence(['build']);
-});
+// gulp.task('default', function () {
+	// runSequence(['build']);
+// });

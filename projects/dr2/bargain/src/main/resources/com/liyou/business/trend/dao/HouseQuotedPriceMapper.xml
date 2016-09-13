@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liyou.business.trend.dao.HouseQuotedPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.liyou.business.trend.pojo.HouseQuotedPrice" >
+    <id column="bargainid" property="bargainid" jdbcType="BIGINT" />
+    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+    <result column="building" property="building" jdbcType="VARCHAR" />
+    <result column="building_no" property="buildingNo" jdbcType="VARCHAR" />
+    <result column="room" property="room" jdbcType="SMALLINT" />
+    <result column="floor" property="floor" jdbcType="SMALLINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="floors" property="floors" jdbcType="SMALLINT" />
+    <result column="rooms" property="rooms" jdbcType="SMALLINT" />
+    <result column="if_first" property="ifFirst" jdbcType="TINYINT" />
+    <result column="roomtype" property="roomtype" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="INTEGER" />
+    <result column="buildtype" property="buildtype" jdbcType="VARCHAR" />
+    <result column="quoted_total_price" property="quotedTotalPrice" jdbcType="BIGINT" />
+    <result column="quoted_sinprice" property="quotedSinprice" jdbcType="INTEGER" />
+    <result column="quoted_date" property="quotedDate" jdbcType="TIMESTAMP" />
+    <result column="agent_id" property="agentId" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="agent_superior_id" property="agentSuperiorId" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select *
+    from house_quoted_price
+    where bargainid = #{bargainid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from house_quoted_price
+    where bargainid = #{bargainid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.liyou.business.trend.pojo.HouseQuotedPrice" >
+    insert into ${baseName}.house_quoted_price (bargainid, house_id, building, 
+      building_no, room, floor, 
+      address, floors, rooms, 
+      if_first, roomtype, area, 
+      buildtype, quoted_total_price, quoted_sinprice, 
+      quoted_date, agent_id, store_id, 
+      agent_superior_id)
+    values (#{bargainid,jdbcType=BIGINT}, #{houseId,jdbcType=INTEGER}, #{building,jdbcType=VARCHAR}, 
+      #{buildingNo,jdbcType=VARCHAR}, #{room,jdbcType=SMALLINT}, #{floor,jdbcType=SMALLINT}, 
+      #{address,jdbcType=VARCHAR}, #{floors,jdbcType=SMALLINT}, #{rooms,jdbcType=SMALLINT}, 
+      #{ifFirst,jdbcType=TINYINT}, #{roomtype,jdbcType=INTEGER}, #{area,jdbcType=INTEGER}, 
+      #{buildtype,jdbcType=VARCHAR}, #{quotedTotalPrice,jdbcType=BIGINT}, #{quotedSinprice,jdbcType=INTEGER}, 
+      #{quotedDate,jdbcType=TIMESTAMP}, #{agentId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
+      #{agentSuperiorId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liyou.business.trend.pojo.HouseQuotedPrice" >
+    insert into ${baseName}.house_quoted_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bargainid != null" >
+        bargainid,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="building != null" >
+        building,
+      </if>
+      <if test="buildingNo != null" >
+        building_no,
+      </if>
+      <if test="room != null" >
+        room,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="floors != null" >
+        floors,
+      </if>
+      <if test="rooms != null" >
+        rooms,
+      </if>
+      <if test="ifFirst != null" >
+        if_first,
+      </if>
+      <if test="roomtype != null" >
+        roomtype,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="buildtype != null" >
+        buildtype,
+      </if>
+      <if test="quotedTotalPrice != null" >
+        quoted_total_price,
+      </if>
+      <if test="quotedSinprice != null" >
+        quoted_sinprice,
+      </if>
+      <if test="quotedDate != null" >
+        quoted_date,
+      </if>
+      <if test="agentId != null" >
+        agent_id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="agentSuperiorId != null" >
+        agent_superior_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bargainid != null" >
+        #{bargainid,jdbcType=BIGINT},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="building != null" >
+        #{building,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingNo != null" >
+        #{buildingNo,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null" >
+        #{room,jdbcType=SMALLINT},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=SMALLINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="floors != null" >
+        #{floors,jdbcType=SMALLINT},
+      </if>
+      <if test="rooms != null" >
+        #{rooms,jdbcType=SMALLINT},
+      </if>
+      <if test="ifFirst != null" >
+        #{ifFirst,jdbcType=TINYINT},
+      </if>
+      <if test="roomtype != null" >
+        #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=INTEGER},
+      </if>
+      <if test="buildtype != null" >
+        #{buildtype,jdbcType=VARCHAR},
+      </if>
+      <if test="quotedTotalPrice != null" >
+        #{quotedTotalPrice,jdbcType=BIGINT},
+      </if>
+      <if test="quotedSinprice != null" >
+        #{quotedSinprice,jdbcType=INTEGER},
+      </if>
+      <if test="quotedDate != null" >
+        #{quotedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="agentSuperiorId != null" >
+        #{agentSuperiorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liyou.business.trend.pojo.HouseQuotedPrice" >
+    update ${baseName}.house_quoted_price
+    <set >
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="building != null" >
+        building = #{building,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingNo != null" >
+        building_no = #{buildingNo,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null" >
+        room = #{room,jdbcType=SMALLINT},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=SMALLINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="floors != null" >
+        floors = #{floors,jdbcType=SMALLINT},
+      </if>
+      <if test="rooms != null" >
+        rooms = #{rooms,jdbcType=SMALLINT},
+      </if>
+      <if test="ifFirst != null" >
+        if_first = #{ifFirst,jdbcType=TINYINT},
+      </if>
+      <if test="roomtype != null" >
+        roomtype = #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=INTEGER},
+      </if>
+      <if test="buildtype != null" >
+        buildtype = #{buildtype,jdbcType=VARCHAR},
+      </if>
+      <if test="quotedTotalPrice != null" >
+        quoted_total_price = #{quotedTotalPrice,jdbcType=BIGINT},
+      </if>
+      <if test="quotedSinprice != null" >
+        quoted_sinprice = #{quotedSinprice,jdbcType=INTEGER},
+      </if>
+      <if test="quotedDate != null" >
+        quoted_date = #{quotedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentId != null" >
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="agentSuperiorId != null" >
+        agent_superior_id = #{agentSuperiorId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bargainid = #{bargainid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liyou.business.trend.pojo.HouseQuotedPrice" >
+    update ${baseName}.house_quoted_price
+    set house_id = #{houseId,jdbcType=INTEGER},
+      building = #{building,jdbcType=VARCHAR},
+      building_no = #{buildingNo,jdbcType=VARCHAR},
+      room = #{room,jdbcType=SMALLINT},
+      floor = #{floor,jdbcType=SMALLINT},
+      address = #{address,jdbcType=VARCHAR},
+      floors = #{floors,jdbcType=SMALLINT},
+      rooms = #{rooms,jdbcType=SMALLINT},
+      if_first = #{ifFirst,jdbcType=TINYINT},
+      roomtype = #{roomtype,jdbcType=INTEGER},
+      area = #{area,jdbcType=INTEGER},
+      buildtype = #{buildtype,jdbcType=VARCHAR},
+      quoted_total_price = #{quotedTotalPrice,jdbcType=BIGINT},
+      quoted_sinprice = #{quotedSinprice,jdbcType=INTEGER},
+      quoted_date = #{quotedDate,jdbcType=TIMESTAMP},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      agent_superior_id = #{agentSuperiorId,jdbcType=INTEGER}
+    where bargainid = #{bargainid,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 获取小区进一个月的平均报价 -->
+  <select id="getHouseAvgQuote" resultType="java.lang.Long" >
+  	SELECT round(sum(quoted_total_price)/sum(area)*100) FROM ${baseName}.house_quoted_price 
+  	WHERE house_id = #{houseId} AND quoted_date BETWEEN #{beginDate} AND #{endDate} 
+  </select>
+  
+  
+</mapper>

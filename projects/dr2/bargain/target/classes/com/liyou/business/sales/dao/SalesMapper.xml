@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liyou.business.sales.dao.SalesMapper" >
+  <resultMap id="SalesResultMap" type="com.liyou.business.sales.pojo.Sales">
+    <id column="house_id" property="house_id" jdbcType="INTEGER" />
+    <id column="valyear" property="valyear" jdbcType="INTEGER" />
+    <id column="valmonth" property="valmonth" jdbcType="INTEGER" />
+    <id column="totalprice_period_id" property="totalprice_period_id" jdbcType="INTEGER" />
+    <id column="rooms" property="rooms" jdbcType="INTEGER" />
+    <id column="building" property="building" jdbcType="INTEGER" />
+    <id column="floor" property="floor" jdbcType="INTEGER" />
+    <id column="if_first" property="if_first" jdbcType="INTEGER" />
+    <result column="h_price" property="h_price" jdbcType="INTEGER" />
+    <result column="l_price" property="l_price" jdbcType="INTEGER" />
+    <result column="sales_count" property="sales_count" jdbcType="INTEGER" />
+    <result column="rate" property="rate" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="getSales" resultMap="SalesResultMap" parameterType="com.liyou.business.sales.pojo.param.SalesParam">
+  		SELECT sales_count,rate,bottom_price,top_price,if_first from ${baseName}.house_calc_sales_rate a INNER JOIN ${baseName}.city_totalprice_range_config b on a.totalprice_period_id=b.periodid where valyear=YEAR(NOW()) and valmonth=MONTH(NOW()) 
+	  <if test="comparetype!=null">
+	     and comparetype=#{comparetype,jdbcType=INTEGER}
+	  </if>
+	  <if test="building!=null">
+	  	and building=#{building,jdbcType=VARCHAR}
+	  </if>
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      ORDER BY sales_count desc LIMIT 1
+  </select>
+  
+  <select id="getHistoryPrice" resultMap="SalesResultMap" parameterType="com.liyou.business.sales.pojo.param.SalesParam">
+  		SELECT udc_name roomtype,building_no building,sinprice,totalprice,bargain_area,floor,bargaindate from ${baseName}.fetch_bargain_history a LEFT JOIN ${baseName}.udc_info b on a.roomtype=b.udc_code where 1=1
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      <if test="building!=null">
+      	and building_no=#{building,jdbcType=INTEGER}
+      </if>
+      <if test="startDate!=null and endDate!=null">
+         and bargaindate BETWEEN #{startDate,jdbcType=VARCHAR} and #{endDate,jdbcType=VARCHAR}
+      </if>
+      ORDER BY sinprice
+      <if test="sort==1">
+      	DESC
+      </if>
+       LIMIT 1
+  </select>
+  
+  <select id="getbaginHistoryPrice" resultMap="SalesResultMap" parameterType="com.liyou.business.sales.pojo.param.SalesParam">
+  		SELECT udc_name roomtype,building_no building,sinprice,totalprice,bargain_area,floor,bargaindate from ${baseName}.bargain_history a LEFT JOIN ${baseName}.udc_info b on a.roomtype=b.udc_code where 1=1
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      <if test="building!=null">
+      	and building_no=#{building,jdbcType=INTEGER}
+      </if>
+      <if test="startDate!=null and endDate!=null">
+         and bargaindate BETWEEN #{startDate,jdbcType=VARCHAR} and #{endDate,jdbcType=VARCHAR}
+      </if>
+      ORDER BY sinprice 
+      <if test="sort==1">
+      	DESC
+      </if>
+      LIMIT 1
+  </select>
+
+  <select id="getSalesSinPrice" resultMap="SalesResultMap" parameterType="com.liyou.business.sales.pojo.param.SalesParam">
+  		SELECT sales_count,rate,l_price,h_price,if_first from ${baseName}.house_calc_sinprice_sales_rate a  where valyear=YEAR(NOW()) and valmonth=MONTH(NOW())
+	    <if test="comparetype!=null">
+	     and comparetype=#{comparetype,jdbcType=INTEGER}
+	  </if>
+	  <if test="building!=null">
+	  	and building=#{building,jdbcType=VARCHAR}
+	  </if>
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      ORDER BY sales_count desc LIMIT 1
+  </select>
+  
+   <select id="getHistorySinPricePrice" resultMap="SalesResultMap" parameterType="com.liyou.business.sales.pojo.param.SalesParam">
+  		SELECT udc_name roomtype,building_no building,sinprice,bargain_area,floor,bargaindate from ${baseName}.fetch_bargain_history a LEFT JOIN ${baseName}.udc_info b on a.roomtype=b.udc_code where 1=1
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      <if test="building!=null">
+      	and building_no=#{building,jdbcType=INTEGER}
+      </if>
+      <if test="startDate!=null and endDate!=null">
+         and bargaindate BETWEEN #{startDate,jdbcType=VARCHAR} and #{endDate,jdbcType=VARCHAR}
+      </if>
+      ORDER BY sinprice 
+      <if test="sort==1">
+      	DESC
+      </if>
+      LIMIT 1
+  </select>
+   
+  <select id="getbaginHistorySinPricePrice" resultMap="SalesResultMap" parameterType="com.liyou.business.sales.pojo.param.SalesParam">
+  		SELECT udc_name roomtype,building_no building,sinprice,bargain_area,floor,bargaindate from ${baseName}.bargain_history a LEFT JOIN ${baseName}.udc_info b on a.roomtype=b.udc_code where 1=1
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      <if test="building!=null">
+      	and building_no=#{building,jdbcType=INTEGER}
+      </if>
+      <if test="startDate!=null and endDate!=null">
+         and bargaindate BETWEEN #{startDate,jdbcType=VARCHAR} and #{endDate,jdbcType=VARCHAR}
+      </if>
+      ORDER BY sinprice
+      <if test="sort==1">
+      	DESC
+      </if>
+      LIMIT 1
+  </select>
+  
+  <select id="getPriceDetail" resultType="com.liyou.business.sales.pojo.houseQuotedPrice" parameterType="com.liyou.business.sales.pojo.param.HousePriceDetailParam">
+  		SELECT area,quoted_total_price,rooms,udc_name,floor,floor_display,a.agent_id,agent_name from  ${baseName}.house_quoted_price a LEFT JOIN ${baseName}.udc_info b on a.roomtype=b.udc_code and udc_type=9 LEFT JOIN ${baseName}.agent_info c on a.agent_id=c.agent_id where 1=1
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+         and rooms=#{rooms,jdbcType=INTEGER}
+      </if>
+      <if test="floor != null" >
+         and floor=#{floor,jdbcType=INTEGER}
+      </if>
+      <if test="sortDesc!=null">
+      	order by #{sortDesc} desc
+      </if>
+      <if test="sortAsc!=null">
+      	 order by #{sortAsc} asc
+      </if>
+      <if test="start != null and count != null">
+         limit #{start,jdbcType=INTEGER},#{count,jdbcType=INTEGER}
+      </if>
+       <if test="count != null and start == null">
+         limit #{count,jdbcType=INTEGER}
+      </if>
+      <if test="count == null and start == null">
+        	limit 5
+      </if>
+  </select>
+   
+  <select id="getHousePercentage" resultType="com.liyou.business.sales.pojo.HouseSalesRatio" parameterType="com.liyou.business.sales.pojo.param.HousePercentage">
+  		SELECT rooms,SUM(sales_count) salesCount from ${baseName}.house_calc_sales_rate where comparetype = 1 and valyear=YEAR(NOW()) and valmonth=MONTH(NOW())
+  	  <if test="houseId != null" >
+         and house_id=#{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="rooms != null" >
+      	 and rooms in
+         <foreach collection="rooms" item="item" open="(" close=")" separator=",">
+         	#{item}
+         </foreach>
+      </if>
+      GROUP BY rooms
+  </select>
+
+  
+  <!-- <select id="getHotHousePlateSchool" resultType="com.liyou.business.sales.pojo.HotHousePlateSchool" >
+  		SELECT hot_id,name,(case when #{type}='house' then 1 when #{type}='plate' then 2 when #{type}='school' then 3 end) type from ${baseName}.hottest_sales_calc where valyear=YEAR(NOW()) and valmonth=MONTH(NOW())
+  	  <if test="type=='house'">
+         and type=1
+      </if>
+      <if test="type=='plate'">
+         and type=2
+      </if>
+      <if test="type=='school'">
+         and type=3
+      </if>
+      order by sales_count desc limit 6
+  </select> -->
+  
+  <select id="getHotHousePlateSchool" resultType="com.liyou.business.sales.pojo.HotHousePlateSchool" >
+  	  <if test="type=='house'">
+         select house_name name, hi.house_id id,t.count,(case when #{type}='house' then 1 when #{type}='plate' then 2 when #{type}='school' then 3 end) type from ${baseName}.house_info hi,
+		(select SUM(sales_count) as count, house_id from ${baseName}.house_calc_sales_rate 
+		where 
+		comparetype = 0 AND valyear =YEAR(NOW()) and valmonth=MONTH(NOW())  
+		GROUP BY house_id
+		ORDER BY count DESC
+		<if test="needCount==null or  needCount==0">
+			limit 6
+		</if>
+		<if test="needCount!=null and needCount!=0">
+			limit #{needCount}
+		</if>) t
+		where 
+		t.house_id = hi.house_id
+      </if>
+      <if test="type=='plate'">
+    SELECT
+    t.count,
+    t.plate_id id,
+    ui.udc_name name,(case when #{type}='house' then 1 when #{type}='plate' then 2 when #{type}='school' then 3 end) type
+	FROM
+    ${baseName}.udc_info ui,
+    (
+        SELECT
+            count(0) AS count,
+            plate_id,
+            district_id
+        FROM
+            ${baseName}.bargain_history bh,
+            ${baseName}.house_info hi
+        WHERE
+            bh.house_id = hi.house_id
+        AND bh.bargaindate >=date_add(NOW(), interval -1 month)
+        AND bh.property_attr = 1
+        GROUP BY
+            hi.plate_id
+        ORDER BY
+            count DESC
+        <if test="needCount==null or  needCount==0">
+			limit 6
+		</if>
+		<if test="needCount!=null and needCount!=0">
+			limit #{needCount}
+		</if>
+    ) t
+WHERE
+    ui.parent_code = t.district_id
+AND ui.udc_type = 7
+AND ui.udc_code = t.plate_id
+      </if>
+      <if test="type=='school'">
+         SELECT
+	s.schoolid id,
+	sum(mycount) count,
+  s.schoolname name,(case when #{type}='house' then 1 when #{type}='plate' then 2 when #{type}='school' then 3 end) type
+FROM
+	(
+		SELECT
+			a.schoolid,
+			b.house_id,
+			b.mycount
+		FROM
+			${baseName}.school_house a,
+			(
+				SELECT
+					house_id,
+					count(0) mycount
+				FROM
+					${baseName}.bargain_history
+				WHERE
+					property_attr = 1
+				AND bargaindate >= DATE_ADD(NOW(), INTERVAL - 1 MONTH)
+				GROUP BY
+					house_id
+				HAVING
+					count(0) > 0
+			) b
+		WHERE
+			a.house_id = b.house_id
+	) c inner JOIN ${baseName}.school_info s on c.schoolid=s.schoolid
+GROUP BY
+	c.schoolid
+ORDER BY
+	count DESC
+	<if test="needCount==null or  needCount==0">
+			limit 6
+	</if>
+	<if test="needCount!=null and needCount!=0">
+			limit #{needCount}
+	</if>
+      </if>
+  </select>
+  
+
+  
+  <select id="getHouseSalecountByMonth" resultType="map" >
+	SELECT hc.house_id AS houseId,hi.house_name AS houseName,ht.sinprice/100 AS sinprice, sum(hc.sales_count) AS counts FROM ${baseName}.house_calc_sales_rate hc,${baseName}.house_info hi ,${baseName}.house_toparea_bargain ht  
+	WHERE hc.house_id=hi.house_id AND hc.house_id=ht.house_id AND hc.comparetype=0 AND hc.if_first=#{isFirst,jdbcType=INTEGER} AND hc.valyear=YEAR(NOW()) AND hc.valmonth=MONTH(NOW())
+	GROUP BY hc.house_id HAVING counts>0 ORDER BY counts DESC LIMIT ${needCount}
+  </select>
+  
+  <select id="getSchoolSalecountByMonth" resultType="map">
+		SELECT t1.schoolid AS schoolId ,t3.schoolname AS schoolName,t3.characteristics AS characteristics, count(t1.schoolid) salesCount 
+		FROM ${baseName}.school_house t1 JOIN ${baseName}.bargain_history t2 ON t1.house_id=t2.house_id
+		JOIN
+		${baseName}.school_info t3 ON t1.schoolid=t3.schoolid
+		WHERE t2.property_attr = 1 AND t3.objecttype in (9050,9052)
+		AND t2.bargaindate>#{bargaindate,jdbcType=VARCHAR}
+		GROUP BY t1.schoolid HAVING salesCount>0 ORDER BY salescount DESC LIMIT ${needCount}
+  </select>
+  <!-- <cache /> -->
+</mapper>

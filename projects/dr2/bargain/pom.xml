@@ -1,0 +1,406 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.liyou</groupId>
+	<artifactId>bargain</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.3.RELEASE</version>
+	</parent>
+	
+	<properties>
+		<!-- 文件拷贝时的编码 -->  
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
+        <!-- 编译时的编码 -->  
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>  
+        
+		<!-- commons -->
+		<commons-io.version></commons-io.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<!-- springMvc -->
+		<spring-jdbc.version>4.1.6.RELEASE</spring-jdbc.version>
+		<spring-tx.version>4.1.6.RELEASE</spring-tx.version>
+		<spring-web.version>4.1.6.RELEASE</spring-web.version>
+		<spring-webmvc>4.1.6.RELEASE</spring-webmvc>
+		<spring-data-japa.version>1.8.0.RELEASE</spring-data-japa.version>
+		<spring-test.version>4.1.6.RELEASE</spring-test.version>
+		<aspectjweaver.version>1.8.5</aspectjweaver.version>
+		<webmvc.version>2.2.2.RELEASE</webmvc.version>
+		<!-- myBatis -->
+		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis-generator-core.version>1.3.2</mybatis-generator-core.version>
+		<mybatis-spring.version>1.2.2</mybatis-spring.version>
+		<mysql-connector-java.version>5.1.34</mysql-connector-java.version>
+		<!-- mybatis pagehelper -->
+		<pagehelper.version>3.6.3</pagehelper.version>
+		
+		<java.version>1.7</java.version>  
+        <start-class>com.liyou.Application</start-class>  
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		<!-- datasource heroku -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP-java6</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>tools</artifactId>
+					<groupId>com.sun</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- aspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		
+		<!-- myBatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>${mybatis-generator-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- mybatis pagehelper -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
+		</dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+		</dependency>
+		<!-- javax -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		
+		<dependency>  
+		    <groupId>net.sf.json-lib</groupId>  
+		    <artifactId>json-lib</artifactId>  
+		    <version>2.1</version>  
+		    <classifier>jdk15</classifier>  
+		</dependency>  
+		
+		
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter</artifactId>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.springframework.boot</groupId>
+		            <artifactId>spring-boot-starter-logging</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-log4j</artifactId>
+		</dependency>
+		
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-legacy</artifactId>
+		    <version>1.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+		   <groupId>commons-fileupload</groupId>
+		   <artifactId>commons-fileupload</artifactId>
+		   <version>1.3.1</version>
+		</dependency>
+	</dependencies>
+	
+	<!-- maven打包分环境处理 . release是正式环境, debug是299测试环境, test是test测试环境 -->
+	<profiles> 
+        <profile>  
+            <id>release</id>  
+            <properties>  
+                <dev>release</dev>
+            </properties>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+            </activation>  
+        </profile>		
+        <profile>  
+            <id>debug</id>  
+            <properties>  
+                <dev>debug</dev>
+            </properties>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+            </activation>  
+        </profile>
+        <profile>  
+            <id>test</id>  
+            <properties>  
+                <dev>test</dev>
+            </properties>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+            </activation>  
+        </profile>
+    </profiles>
+
+	<build>
+	
+		
+		<!-- maven打包分环境处理 . test既测试环境 , prod是正式环境 -->
+		<filters>  
+            <filter>../../../build/dr2/bargain/${dev}/application.yml</filter> 
+        </filters>  
+        <resources>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <filtering>true</filtering>
+            </resource>
+            <resource>  
+                <directory>../../../build/dr2/bargain/${dev}/</directory>  
+                <filtering>true</filtering>  
+            </resource>  
+        </resources>
+        
+        
+        
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.mybatis.generator</groupId>
+					<artifactId>mybatis-generator-maven-plugin</artifactId>
+					<version>1.3.2</version>
+					<configuration>
+						<configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
+						<verbose>true</verbose>
+						<overwrite>true</overwrite>
+					</configuration>
+					<executions>
+						<execution>
+							<id>Generate MyBatis Artifacts</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>1.3.3.RELEASE</version>
+					
+					<executions>
+					  <execution>
+						<goals>
+						  <goal>repackage</goal>
+						</goals>
+						<configuration>
+						  <classifier>exec</classifier>
+						</configuration>
+					  </execution>
+					</executions>
+					
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>  
+					<artifactId>maven-jar-plugin</artifactId>  
+					<version>2.4</version>  
+					<configuration>  
+						<archive>  
+							<!-- 
+		                       	 生成的jar中，不要包含pom.xml和pom.properties这两个文件 
+		                    -->  
+		                    <addMavenDescriptor>false</addMavenDescriptor>  
+							<manifest>  
+								<addClasspath>true</addClasspath>  
+								<classpathPrefix>lib/</classpathPrefix>  
+								<mainClass>com.liyou.Application</mainClass>  
+							</manifest>  
+						</archive>  
+						<!-- 
+		                	    过滤掉不希望包含在jar中的文件 
+		                -->  
+		               
+		                
+					</configuration>  
+				</plugin>
+				
+				<plugin>  
+					<groupId>org.apache.maven.plugins</groupId>  
+	                <artifactId>maven-assembly-plugin</artifactId> 
+	                <version>2.4</version>
+	                <configuration>  
+	                    <archive>  
+	                        <manifest>  
+	                            <mainClass>com.liyou.Application</mainClass>  
+	                        </manifest>  
+	                    </archive>  
+	                    <descriptorRefs>  
+	                        <descriptorRef>jar-with-dependencies</descriptorRef>  
+	                    </descriptorRefs>  
+	                </configuration>  
+            	</plugin>  
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>  
+						<includeTypes>jar</includeTypes>  
+						<overWriteSnapshots>true</overWriteSnapshots>  
+						<type>jar</type>  
+						<outputDirectory>${project.build.directory}/lib</outputDirectory>  
+					</configuration>  
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>  
+        <repository>  
+            <id>spring-snapshots</id>  
+            <url>http://repo.spring.io/snapshot</url>  
+            <snapshots>  
+                <enabled>true</enabled>  
+            </snapshots>  
+        </repository>  
+        <repository>  
+            <id>spring-milestones</id>  
+            <url>http://repo.spring.io/milestone</url>  
+        </repository>  
+    </repositories>  
+    <pluginRepositories>  
+        <pluginRepository>  
+            <id>spring-snapshots</id>  
+            <url>http://repo.spring.io/snapshot</url>  
+        </pluginRepository>  
+        <pluginRepository>  
+            <id>spring-milestones</id>  
+            <url>http://repo.spring.io/milestone</url>  
+        </pluginRepository>  
+    </pluginRepositories>  
+    
+</project>

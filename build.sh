@@ -2,7 +2,7 @@
 
 # gulp --buildtype release
 
-# gulp --buildtype debug
+ gulp --buildtype debug
 
-gulp --buildtype test
+#gulp --buildtype test
 
