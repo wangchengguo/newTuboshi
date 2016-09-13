@@ -1,0 +1,11 @@
+{
+  "name": "TuboshiBuild",
+  "description": "Build tools for Dr2 project",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-ssh": "^0.5.6",
+	"run-sequence": "^1.2.2",
+    "gulp-util": "^3.0.7"
+  }
+}
