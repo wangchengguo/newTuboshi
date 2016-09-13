@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liyou.business.trend.dao.PlateCalcHouseRankMapper" >
+  <resultMap id="BaseResultMap" type="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    <id column="plate_id" property="plateId" jdbcType="INTEGER" />
+    <id column="house_id" property="houseId" jdbcType="INTEGER" />
+    <id column="months" property="months" jdbcType="SMALLINT" />
+    <id column="valyear" property="valyear" jdbcType="SMALLINT" />
+    <id column="valmonth" property="valmonth" jdbcType="SMALLINT" />
+    <result column="avprice" property="avprice" jdbcType="INTEGER" />
+    <result column="rise" property="rise" jdbcType="INTEGER" />
+    <result column="calc_time" property="calcTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    select *
+    from ${baseName}.plate_calc_house_rank
+    where plate_id = #{plateId,jdbcType=INTEGER}
+      and house_id = #{houseId,jdbcType=INTEGER}
+      and months = #{months,jdbcType=SMALLINT}
+      and valyear = #{valyear,jdbcType=SMALLINT}
+      and valmonth = #{valmonth,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    delete from ${baseName}.plate_calc_house_rank
+    where plate_id = #{plateId,jdbcType=INTEGER}
+      and house_id = #{houseId,jdbcType=INTEGER}
+      and months = #{months,jdbcType=SMALLINT}
+      and valyear = #{valyear,jdbcType=SMALLINT}
+      and valmonth = #{valmonth,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    insert into ${baseName}.plate_calc_house_rank (plate_id, house_id, months, 
+      valyear, valmonth, avprice, 
+      rise, calc_time)
+    values (#{plateId,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER}, #{months,jdbcType=SMALLINT}, 
+      #{valyear,jdbcType=SMALLINT}, #{valmonth,jdbcType=SMALLINT}, #{avprice,jdbcType=INTEGER}, 
+      #{rise,jdbcType=INTEGER}, #{calcTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    insert into ${baseName}.plate_calc_house_rank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="plateId != null" >
+        plate_id,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="months != null" >
+        months,
+      </if>
+      <if test="valyear != null" >
+        valyear,
+      </if>
+      <if test="valmonth != null" >
+        valmonth,
+      </if>
+      <if test="avprice != null" >
+        avprice,
+      </if>
+      <if test="rise != null" >
+        rise,
+      </if>
+      <if test="calcTime != null" >
+        calc_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="plateId != null" >
+        #{plateId,jdbcType=INTEGER},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="months != null" >
+        #{months,jdbcType=SMALLINT},
+      </if>
+      <if test="valyear != null" >
+        #{valyear,jdbcType=SMALLINT},
+      </if>
+      <if test="valmonth != null" >
+        #{valmonth,jdbcType=SMALLINT},
+      </if>
+      <if test="avprice != null" >
+        #{avprice,jdbcType=INTEGER},
+      </if>
+      <if test="rise != null" >
+        #{rise,jdbcType=INTEGER},
+      </if>
+      <if test="calcTime != null" >
+        #{calcTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    update ${baseName}.plate_calc_house_rank
+    <set >
+      <if test="avprice != null" >
+        avprice = #{avprice,jdbcType=INTEGER},
+      </if>
+      <if test="rise != null" >
+        rise = #{rise,jdbcType=INTEGER},
+      </if>
+      <if test="calcTime != null" >
+        calc_time = #{calcTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where plate_id = #{plateId,jdbcType=INTEGER}
+      and house_id = #{houseId,jdbcType=INTEGER}
+      and months = #{months,jdbcType=SMALLINT}
+      and valyear = #{valyear,jdbcType=SMALLINT}
+      and valmonth = #{valmonth,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    update ${baseName}.plate_calc_house_rank
+    set avprice = #{avprice,jdbcType=INTEGER},
+      rise = #{rise,jdbcType=INTEGER},
+      calc_time = #{calcTime,jdbcType=TIMESTAMP}
+    where plate_id = #{plateId,jdbcType=INTEGER}
+      and house_id = #{houseId,jdbcType=INTEGER}
+      and months = #{months,jdbcType=SMALLINT}
+      and valyear = #{valyear,jdbcType=SMALLINT}
+      and valmonth = #{valmonth,jdbcType=SMALLINT}
+  </update>
+  
+  <select id="selectByAll" resultMap="BaseResultMap" parameterType="com.liyou.business.trend.pojo.PlateCalcHouseRank" >
+    select *
+    from ${baseName}.plate_calc_house_rank
+    where 1 = 1 
+      <if test="plateId != null" >
+        and plate_id = #{plateId,jdbcType=INTEGER}
+      </if>
+      <if test="houseId != null" >
+        and house_id = #{houseId,jdbcType=INTEGER}
+      </if>
+      <if test="months != null" >
+        and months = #{months,jdbcType=SMALLINT}
+      </if>
+      <if test="valyear != null" >
+        and valyear = #{valyear,jdbcType=SMALLINT}
+      </if>
+      <if test="valmonth != null" >
+        and valmonth = #{valmonth,jdbcType=SMALLINT}
+      </if>
+      <if test="avprice != null" >
+        and avprice = #{avprice,jdbcType=INTEGER}
+      </if>
+      <if test="rise != null" >
+        and rise = #{rise,jdbcType=INTEGER}
+      </if>
+      <if test="calcTime != null" >
+        and calc_time = #{calcTime,jdbcType=TIMESTAMP}
+      </if>
+  </select>
+  
+  <select id="selectPriceRateByYM" resultType="map">
+  			SELECT price_rate AS priceRate FROM ${baseName}.house_trending WHERE valyear=#{valyear,jdbcType=VARCHAR}
+			AND valmonth = #{valmonth,jdbcType=INTEGER}
+			AND house_id = #{houseId,jdbcType=INTEGER}
+			AND price_month= #{priceMonth,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectSalesRateByYM" resultType="map">
+  			SELECT sales_rate AS salesRate FROM ${baseName}.house_trending WHERE valyear=#{valyear,jdbcType=VARCHAR}
+			AND valmonth = #{valmonth,jdbcType=INTEGER}
+			AND house_id = #{houseId,jdbcType=INTEGER}
+			AND sales_month = #{salesMonth,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectTrendingResultByYM" resultType="map">
+  			SELECT trending_result AS trendResult FROM ${baseName}.house_trending WHERE valyear=#{valyear,jdbcType=VARCHAR}
+			AND valmonth = #{valmonth,jdbcType=INTEGER}
+			AND house_id = #{houseId,jdbcType=INTEGER}
+			AND price_month= #{priceMonth,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectHouseTrendingByYM" resultType="map">
+  			SELECT house_id AS houseId,price_rate AS priceRate, sales_rate AS salesRate,trending_result AS trendingResult FROM ${baseName}.house_trending WHERE valyear=#{valyear,jdbcType=VARCHAR}
+			AND valmonth = #{valmonth,jdbcType=INTEGER}
+			AND house_id = #{houseId,jdbcType=INTEGER}
+  </select>
+  
+  
+</mapper>

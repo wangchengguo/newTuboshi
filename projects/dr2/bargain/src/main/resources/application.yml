@@ -1,0 +1,37 @@
+# Server settings
+server:
+    port:8085
+    address:localhost
+
+# DATASOURCE
+jdbc:
+    dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+    url: jdbc:mysql://10.47.50.49:3306/sh_shouseapp_pre?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    databaseName: sh_shouseapp_pre
+    serverName: 10.47.50.49
+    username: sjxdeveloper
+    password: TBM6FqNm5g
+    cachePrepStmts: true
+    prepStmtsSize: 250
+    prepStmtsCacheSqlLimit: 2048
+    userServerPrepStmts: true
+
+# SPRING PROFILES
+spring:
+    # HTTP ENCODING
+    http:
+        encoding.charset: UTF-8
+        encoding.enable: true
+        encoding.force: true
+    # CONFIGLOCATION
+
+# MyBatis
+mybatis:
+    typeAliasesPackage: com.liyou.**.pojo
+    mapperLocations: classpath:/com/liyou/business/**/dao/*.xml
+    configLocation: classpath:/mybatis-config.xml
+
+# LOGGING
+logging:
+    level:
+       com.ibatis:DEBUG
